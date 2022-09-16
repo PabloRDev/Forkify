@@ -13,6 +13,7 @@ import paginationView from "./views/paginationView.js";
 
 const init = () => {
   recipeView.addHandlerRender(controlRecipes);
+  recipeView.addHandlerUpdateServings(controlServings);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
@@ -50,6 +51,11 @@ const controlSearchResults = async () => {
 const controlPagination = (page) => {
   searchResultsView.render(model.getSearchResultPage(page));
   paginationView.render(model.state.search);
+};
+
+const controlServings = (servings) => {
+  model.updateServings(servings);
+  recipeView.render(model.state.recipe);
 };
 
 init();
