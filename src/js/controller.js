@@ -7,6 +7,7 @@ import searchView from "./views/searchView.js";
 import searchResultsView from "./views/searchResultsView.js";
 import paginationView from "./views/paginationView.js";
 import bookmarksView from "./views/bookmarksView.js";
+import addRecipeView from "./views/addRecipeView.js";
 
 if (module.hot) {
   module.hot.accept();
@@ -19,11 +20,12 @@ const init = () => {
   recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
+  addRecipeView.addHandlerUpload(controlAddRecipe);
 };
 
 const controlRecipes = async () => {
   const id = window.location.hash.slice(1);
-  if (!id) throw new Error("No recipe ID found");
+  if (!id) return;
 
   recipeView.renderSpinner();
 
@@ -76,6 +78,10 @@ const controlAddBookmark = () => {
 
 const controlBookmarks = () => {
   bookmarksView.render(model.state.bookmarks);
+};
+
+controlAddRecipe = async (newRecipe) => {
+  console.log(newRecipe);
 };
 
 init();
