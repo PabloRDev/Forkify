@@ -88,6 +88,8 @@ controlAddRecipe = async (newRecipe) => {
     await model.uploadRecipe(newRecipe);
     recipeView.render(model.state.recipe);
     addRecipeView.renderMessage();
+    bookmarksView.render(model.state.bookmarks);
+    window.history.pushState(null, "", `#${model.state.recipe.id}`);
 
     setTimeout(() => {
       addRecipeView.toggleWindow();
