@@ -7,9 +7,9 @@ import searchView from "./views/searchView.js";
 import searchResultsView from "./views/searchResultsView.js";
 import paginationView from "./views/paginationView.js";
 
-// if (module.hot) {
-//   module.hot.accept();
-// }
+if (module.hot) {
+  module.hot.accept();
+}
 
 const init = () => {
   recipeView.addHandlerRender(controlRecipes);
@@ -55,7 +55,7 @@ const controlPagination = (page) => {
 
 const controlServings = (servings) => {
   model.updateServings(servings);
-  recipeView.render(model.state.recipe);
+  recipeView.update(model.state.recipe);
 };
 
 init();
