@@ -14,6 +14,7 @@ if (module.hot) {
 const init = () => {
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
+  recipeView.addHandlerAddBookmark(controlAddBookmark);
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
 };
@@ -57,6 +58,14 @@ const controlPagination = (page) => {
 
 const controlServings = (servings) => {
   model.updateServings(servings);
+  recipeView.update(model.state.recipe);
+};
+
+const controlAddBookmark = () => {
+  !model.state.recipe.bookmarked
+    ? model.addBookmark(model.state.recipe)
+    : model.deleteBookmark(model.state.recipe.id);
+
   recipeView.update(model.state.recipe);
 };
 
