@@ -48,6 +48,8 @@ export const loadSearchResults = async (query) => {
         ingredients: recipe.ingredients,
       };
     });
+
+    state.search.page = 1;
   } catch (error) {
     throw error;
   }
