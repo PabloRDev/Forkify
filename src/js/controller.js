@@ -13,6 +13,7 @@ if (module.hot) {
 }
 
 const init = () => {
+  bookmarksView.addHandlerRender(controlBookmarks);
   recipeView.addHandlerRender(controlRecipes);
   recipeView.addHandlerUpdateServings(controlServings);
   recipeView.addHandlerAddBookmark(controlAddBookmark);
@@ -70,6 +71,10 @@ const controlAddBookmark = () => {
 
   recipeView.update(model.state.recipe);
 
+  bookmarksView.render(model.state.bookmarks);
+};
+
+const controlBookmarks = () => {
   bookmarksView.render(model.state.bookmarks);
 };
 
