@@ -93,10 +93,13 @@ controlAddRecipe = async (newRecipe) => {
 
     setTimeout(() => {
       addRecipeView.toggleWindow();
+      addRecipeView.render(model.state.recipe);
     }, MODAL_CLOSE_SEC * 1000);
   } catch (error) {
     console.error(`${error} 🤷‍♂️`);
-    addRecipeView.renderError(error.message);
+    addRecipeView
+      .renderError(error.message)
+      .then(addRecipeView.render(model.state.recipe));
   }
 };
 
