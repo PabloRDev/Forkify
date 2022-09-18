@@ -2,9 +2,17 @@ import icons from 'url:../../img/icons.svg'
 
 export default class View {
   _data
-
+  _parentElement
+  _errorMessage
+  _message
+  /**
+ * Set data object and render it to the DOM by markup
+ * @param {Object} data
+ * @param {Boolean} render
+ */
   render (data, render = true) {
-    if (!data || (Array.isArray(data) && data.length === 0)) { return this.renderError() }
+    const arrEmpty = Array.isArray(data) && data.length === 0
+    if (!data || arrEmpty) return this.renderError()
 
     this._data = data
     const markup = this._generateMarkup()
@@ -15,6 +23,10 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup)
   }
 
+  /**
+ * Re-render only the changed part of the DOM
+ * @param {Object} data
+ */
   update (data) {
     this._data = data
 
@@ -44,6 +56,9 @@ export default class View {
     })
   }
 
+  /**
+ * Render spinner to the DOM
+ */
   renderSpinner () {
     const markup = `
     <div class="spinner">
@@ -56,6 +71,10 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup)
   }
 
+  /**
+ * Render error message to the DOM
+ * @param {string} message
+ */
   renderError (message = this._errorMessage) {
     const markup = `
     <div class="error">
@@ -70,7 +89,11 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup)
   }
 
-  renderMessage (message = this._message) {
+  /**
+ * Render success message to the DOM
+ * @param {string} message
+ */
+  renderSuccess (message = this._message) {
     const markup = `
     <div class="message">
             <div>
@@ -84,6 +107,9 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup)
   }
 
+  /**
+ * Clear the inner HTML of the parent element
+ */
   _clear () {
     this._parentElement.innerHTML = ''
   }
