@@ -4,21 +4,24 @@
   "description": "",
   "default": "index.js",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html --no-scope-hoist --dist-dir ./dist"
+    "start": "standard --fix && parcel index.html",
+    "build": "standard --fix && parcel build index.html --no-scope-hoist --dist-dir ./dist",
+    "lint": "standard --fix"
   },
   "keywords": [],
-  "author": "",
+  "author": "PabloRDev",
   "license": "ISC",
   "devDependencies": {
     "@parcel/transformer-sass": "^2.7.0",
-    "eslint": "^8.23.1",
-    "eslint-config-prettier": "^8.5.0",
-    "parcel": "^2.7.0"
+    "parcel": "^2.7.0",
+    "standard": "^17.0.0"
   },
   "dependencies": {
     "core-js": "^3.25.1",
     "fractional": "^1.0.0",
     "regenerator-runtime": "^0.13.9"
+  },
+  "eslintConfig": {
+    "extends": "./node_modules/standard/eslintrc.json"
   }
 }

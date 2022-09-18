@@ -1,23 +1,23 @@
-import icons from 'url:../../img/icons.svg'; // Parcel 2
+import icons from 'url:../../img/icons.svg' // Parcel 2
 
-import View from './View';
+import View from './View'
 
 class PreviewView extends View {
-	_parentElement = document.querySelector('.results');
-	_errorMessage = 'No recipes found for your query! Please try again :)';
-	_message = '';
+  _parentElement = document.querySelector('.results')
+  _errorMessage = 'No recipes found for your query! Please try again :)'
+  _message = ''
 
-	_generateMarkup() {
-		const id = window.location.hash.slice(1);
+  _generateMarkup () {
+    const id = window.location.hash.slice(1)
 
-		return `
+    return `
         <li class="preview">
                     <a class="preview__link ${
-	this._data.id === id ? 'preview__link--active' : ''
+this._data.id === id ? 'preview__link--active' : ''
 }" href="#${this._data.id}">
                       <figure class="preview__fig">
                         <img src="${this._data.image}" alt="${
-	this._data.title
+this._data.title
 }" />
                       </figure>
                       <div class="preview__data">
@@ -28,7 +28,7 @@ class PreviewView extends View {
                         ${this._data.publisher}
                         </p>
                         <div class="preview__user-generated ${
-	this._data.key ? '' : 'hidden'
+this._data.key ? '' : 'hidden'
 }">
                         <svg>
                         <use href="${icons}#icon-user"></use>
@@ -37,8 +37,8 @@ class PreviewView extends View {
                     </div>
                   </a>
                 </li>
-        `;
-	}
+        `
+  }
 }
 
-export default new PreviewView();
+export default new PreviewView()

@@ -1,34 +1,35 @@
-import icons from 'url:../../img/icons.svg'; // Parcel 2
+/* eslint-disable no-undef */
+import icons from 'url:../../img/icons.svg' // Parcel 2
 
-import View from './View';
+import View from './View'
 
 class AddRecipeView extends View {
-	_parentElement = document.querySelector('.upload');
-	_message = 'Your recipe was SUCESSFULLY UPLOAD ✌️';
+  _parentElement = document.querySelector('.upload')
+  _message = 'Your recipe was SUCESSFULLY UPLOAD ✌️'
 
-	_window = document.querySelector('.add-recipe-window');
-	_overlay = document.querySelector('.overlay');
-	_btnOpen = document.querySelector('.nav__btn--add-recipe');
-	_btnClose = document.querySelector('.btn--close-modal');
+  _window = document.querySelector('.add-recipe-window')
+  _overlay = document.querySelector('.overlay')
+  _btnOpen = document.querySelector('.nav__btn--add-recipe')
+  _btnClose = document.querySelector('.btn--close-modal')
 
-	constructor() {
-		super();
-		this._addHandlerShowWindow();
-		this._addHandlerHideWindow();
-	}
+  constructor () {
+    super()
+    this._addHandlerShowWindow()
+    this._addHandlerHideWindow()
+  }
 
-	addHandlerUpload(handler) {
-		this._parentElement.addEventListener('submit', function (e) {
-			e.preventDefault();
+  addHandlerUpload (handler) {
+    this._parentElement.addEventListener('submit', function (e) {
+      e.preventDefault()
 
-			const dataArr = [...new FormData(this)];
-			const data = Object.fromEntries(dataArr);
-			handler(data);
-		});
-	}
+      const dataArr = [...new FormData(this)]
+      const data = Object.fromEntries(dataArr)
+      handler(data)
+    })
+  }
 
-	_generateMarkup() {
-		return `
+  _generateMarkup () {
+    return `
       <form class="upload">
         <div class="upload__column">
           <h3 class="upload__heading">Recipe data</h3>
@@ -69,22 +70,22 @@ class AddRecipeView extends View {
           <span>Upload</span>
         </button>
       </form>
-    `;
-	}
+    `
+  }
 
-	_addHandlerShowWindow() {
-		this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
-	}
+  _addHandlerShowWindow () {
+    this._btnOpen.addEventListener('click', this.toggleWindow.bind(this))
+  }
 
-	_addHandlerHideWindow() {
-		this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
-		this._overlay.addEventListener('click', this.toggleWindow.bind(this));
-	}
+  _addHandlerHideWindow () {
+    this._btnClose.addEventListener('click', this.toggleWindow.bind(this))
+    this._overlay.addEventListener('click', this.toggleWindow.bind(this))
+  }
 
-	toggleWindow() {
-		this._overlay.classList.toggle('hidden');
-		this._window.classList.toggle('hidden');
-	}
+  toggleWindow () {
+    this._overlay.classList.toggle('hidden')
+    this._window.classList.toggle('hidden')
+  }
 }
 
-export default new AddRecipeView();
+export default new AddRecipeView()

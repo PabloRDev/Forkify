@@ -1,40 +1,40 @@
-import Fraction from 'fractional';
+import Fraction from 'fractional'
 
-import icons from 'url:../../img/icons.svg';
+import icons from 'url:../../img/icons.svg'
 
-import View from './View.js';
+import View from './View.js'
 
 class RecipeView extends View {
-	_parentElement = document.querySelector('.recipe');
-	_errorMessage = 'We could not find that recipe. Please try another one!';
+  _parentElement = document.querySelector('.recipe')
+  _errorMessage = 'We could not find that recipe. Please try another one!'
 
-	addHandlerRender(handler) {
-		['hashchange', 'load'].forEach((ev) =>
-			window.addEventListener(ev, handler)
-		);
-	}
+  addHandlerRender (handler) {
+    ['hashchange', 'load'].forEach((ev) =>
+      window.addEventListener(ev, handler)
+    )
+  }
 
-	addHandlerUpdateServings(handler) {
-		this._parentElement.addEventListener('click', function (e) {
-			const btn = e.target.closest('.btn--tiny');
-			if (!btn) return;
+  addHandlerUpdateServings (handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--tiny')
+      if (!btn) return
 
-			const { updateTo } = btn.dataset;
-			if (+updateTo > 0) handler(+updateTo);
-		});
-	}
+      const { updateTo } = btn.dataset
+      if (+updateTo > 0) handler(+updateTo)
+    })
+  }
 
-	addHandlerAddBookmark(handler) {
-		this._parentElement.addEventListener('click', function (e) {
-			const btn = e.target.closest('.btn--bookmark');
-			if (!btn) return;
+  addHandlerAddBookmark (handler) {
+    this._parentElement.addEventListener('click', function (e) {
+      const btn = e.target.closest('.btn--bookmark')
+      if (!btn) return
 
-			handler();
-		});
-	}
+      handler()
+    })
+  }
 
-	_generateMarkup() {
-		return `
+  _generateMarkup () {
+    return `
       <figure class="recipe__fig">
       <img src="${this._data.image}" alt="
       ${this._data.title}" class="recipe__img" />
@@ -51,7 +51,7 @@ class RecipeView extends View {
               <use href="${icons}#icon-clock"></use>
             </svg>
             <span class="recipe__info-data recipe__info-data--minutes">${
-	this._data.cookingTime
+this._data.cookingTime
 }</span>
             <span class="recipe__info-text">minutes</span>
           </div>
@@ -60,13 +60,13 @@ class RecipeView extends View {
               <use href="${icons}#icon-users"></use>
             </svg>
             <span class="recipe__info-data recipe__info-data--people">${
-	this._data.servings
+this._data.servings
 }</span>
             <span class="recipe__info-text">servings</span>
 
             <div class="recipe__info-buttons">
               <button class="btn--tiny btn--update-servings" data-update-to='${
-	this._data.servings - 1
+this._data.servings - 1
 }'>
                 <svg>
                   <use href="${icons}#icon-minus-circle"></use>
@@ -90,7 +90,7 @@ class RecipeView extends View {
           <button class="btn--round btn--bookmark">
             <svg class="">
               <use href="${icons}#icon-bookmark${
-	this._data.bookmarked ? '-fill' : ''
+this._data.bookmarked ? '-fill' : ''
 }"></use>
             </svg>
           </button>
@@ -108,7 +108,7 @@ class RecipeView extends View {
           <p class="recipe__directions-text">
             This recipe was carefully designed and tested by
             <span class="recipe__publisher">${
-	this._data.publisher
+this._data.publisher
 }</span>. Please check out
             directions at their website.
           </p>
@@ -123,25 +123,25 @@ class RecipeView extends View {
             </svg>
           </a>
         </div>
-    `;
-	}
+    `
+  }
 
-	_generateMarkupIngredient(ing) {
-		return `
+  _generateMarkupIngredient (ing) {
+    return `
             <li class="recipe__ingredient">
               <svg class="recipe__icon">
                 <use href="${icons}#icon-check"></use>
               </svg>
               <div class="recipe__quantity">  ${
-	ing.quantity ? new Fraction.Fraction(ing.quantity) : ''
+ing.quantity ? new Fraction.Fraction(ing.quantity) : ''
 }</div>
               <div class="recipe__description">
                 <span class="recipe__unit">${ing.unit}</span>
                 ${ing.description}
               </div>
             </li>
-        `;
-	}
+        `
+  }
 }
 
-export default new RecipeView();
+export default new RecipeView()
