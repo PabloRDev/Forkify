@@ -4,7 +4,10 @@ import View from './View'
 
 class PaginationView extends View {
   _parentElement = document.querySelector('.pagination')
-
+  /**
+ *  Execute the handler function when 'click' event is fired on the pagination button
+ * @param {Function} handler
+ */
   addHandlerClick (handler) {
     this._parentElement.addEventListener('click', function (e) {
       e.preventDefault()
@@ -18,6 +21,10 @@ class PaginationView extends View {
     })
   }
 
+  /**
+ *  Generate the markup for the pagination buttons
+ * @returns {string} markup
+ */
   _generateMarkup () {
     const currPage = this._data.page
     const numPages = Math.ceil(

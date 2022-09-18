@@ -1,7 +1,7 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
-import { MODAL_CLOSE_SEC } from './config.js'
+import { MODAL_CLOSE_SEC, ID_HASH } from './config.js'
 import * as model from './model.js'
 import recipeView from './views/recipeView.js'
 import searchView from './views/searchView.js'
@@ -25,7 +25,7 @@ const init = () => {
 }
 
 const controlRecipes = async () => {
-  const id = window.location.hash.slice(1)
+  const id = ID_HASH
   if (!id) return
 
   recipeView.renderSpinner()
@@ -87,7 +87,7 @@ const controlAddRecipe = async (newRecipe) => {
 
     await model.uploadRecipe(newRecipe)
     recipeView.render(model.state.recipe)
-    addRecipeView.renderMessage()
+    addRecipeView.renderSuccess()
     bookmarksView.render(model.state.bookmarks)
     window.history.pushState(null, '', `#${model.state.recipe.id}`)
 

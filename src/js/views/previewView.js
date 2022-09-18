@@ -1,14 +1,18 @@
-import icons from 'url:../../img/icons.svg' // Parcel 2
+import icons from 'url:../../img/icons.svg'
+import { ID_HASH } from '../config'
 
 import View from './View'
 
 class PreviewView extends View {
   _parentElement = document.querySelector('.results')
   _errorMessage = 'No recipes found for your query! Please try again :)'
-  _message = ''
-
+  /**
+ * Set the markup for previews
+ * @returns {string} preview markup
+ * @usedBy SearchResultsView and BookmarksView
+ */
   _generateMarkup () {
-    const id = window.location.hash.slice(1)
+    const id = ID_HASH
 
     return `
         <li class="preview">

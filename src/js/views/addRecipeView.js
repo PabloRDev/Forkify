@@ -18,6 +18,10 @@ class AddRecipeView extends View {
     this._addHandlerHideWindow()
   }
 
+  /**
+ * Execute the handler function when the form is submitted
+ * @param {Function} handler
+ */
   addHandlerUpload (handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault()
@@ -28,6 +32,10 @@ class AddRecipeView extends View {
     })
   }
 
+  /**
+ * Generate the markup for the form
+ * @returns {String} Markup
+ */
   _generateMarkup () {
     return `
       <form class="upload">
@@ -73,15 +81,24 @@ class AddRecipeView extends View {
     `
   }
 
+  /**
+ * Execute the toggleWindow function when the button is clicked
+ */
   _addHandlerShowWindow () {
     this._btnOpen.addEventListener('click', this.toggleWindow.bind(this))
   }
 
+  /**
+ * Execute the toggleWindow function when the button is clicked
+ */
   _addHandlerHideWindow () {
     this._btnClose.addEventListener('click', this.toggleWindow.bind(this))
     this._overlay.addEventListener('click', this.toggleWindow.bind(this))
   }
 
+  /**
+ * Toggle the class 'hidden' to the window and overlay
+ */
   toggleWindow () {
     this._overlay.classList.toggle('hidden')
     this._window.classList.toggle('hidden')

@@ -107,6 +107,7 @@ export default class View {
     this._parentElement.insertAdjacentHTML('afterbegin', markup)
   }
 
+  // Helpers //
   /**
  * Clear the inner HTML of the parent element
  */
