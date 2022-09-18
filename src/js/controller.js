@@ -30,7 +30,7 @@ const controlRecipes = async () => {
 
   recipeView.renderSpinner()
 
-  searchResultsView.update(model.getSearchResultPage())
+  searchResultsView.update(model.getSearchResultsPage())
   bookmarksView.update(model.state.bookmarks)
 
   try {
@@ -50,7 +50,7 @@ const controlSearchResults = async () => {
     if (!query) return
 
     await model.loadSearchResults(query)
-    searchResultsView.render(model.getSearchResultPage())
+    searchResultsView.render(model.getSearchResultsPage())
     paginationView.render(model.state.search)
   } catch (error) {
     console.error(`${error} 🤷‍♂️`)
@@ -58,7 +58,7 @@ const controlSearchResults = async () => {
 }
 
 const controlPagination = (page) => {
-  searchResultsView.render(model.getSearchResultPage(page))
+  searchResultsView.render(model.getSearchResultsPage(page))
   paginationView.render(model.state.search)
 }
 
