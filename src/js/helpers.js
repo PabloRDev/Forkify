@@ -1,3 +1,9 @@
+/**
+ *  AJAX call to API: POST OR GET, depending on uploadData param
+ * @param {string} url
+ * @param {object} uploadData
+ * @returns {Promise<object>} data
+ */
 export const AJAX = async (url, uploadData = undefined) => {
   try {
     const fetchPro = uploadData

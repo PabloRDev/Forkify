@@ -7,7 +7,7 @@ export default class View {
   _message
   /**
  * Set data object and render it to the DOM by markup
- * @param {Object} data
+ * @param {object} data
  * @param {Boolean} render
  */
   render (data, render = true) {
@@ -25,7 +25,7 @@ export default class View {
 
   /**
  * Re-render only the changed part of the DOM
- * @param {Object} data
+ * @param {object} data
  */
   update (data) {
     this._data = data

@@ -31,7 +31,7 @@ export const loadRecipe = async (id) => {
 
     state.recipe = _formatRecipeObject(data)
     _setBookmarked(id)
-  } catch (error) { console.error(error) }
+  } catch (error) { throw error }
 }
 /**
  * Load search results from the API and store them in state.search.results
@@ -79,7 +79,7 @@ export const updateServings = (newServings) => {
 }
 /**
  * Add a recipe to bookmarks and store it in state.bookmarks
- * @param {Object} recipe
+ * @param {object} recipe
  */
 export const addBookmark = (recipe) => {
   state.bookmarks.push(recipe)
@@ -130,12 +130,12 @@ export const uploadRecipe = async (newRecipe) => {
 
     state.recipe = _formatRecipeObject(data)
     addBookmark(state.recipe)
-  } catch (error) { console.error(error) }
+  } catch (error) { throw error }
 }
 // Helpers //
 /**
  * Format recipe object
- * @param {Object} data
+ * @param {object} data
  * @returns recipe formatted object
  */
 const _formatRecipeObject = (data) => {
