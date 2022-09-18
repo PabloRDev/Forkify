@@ -1,7 +1,7 @@
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
 
-import { MODAL_CLOSE_SEC, ID_HASH } from './config.js'
+import { MODAL_CLOSE_SEC } from './config.js'
 import * as model from './model.js'
 import recipeView from './views/recipeView.js'
 import searchView from './views/searchView.js'
@@ -9,11 +9,15 @@ import searchResultsView from './views/searchResultsView.js'
 import paginationView from './views/paginationView.js'
 import bookmarksView from './views/bookmarksView.js'
 import addRecipeView from './views/addRecipeView.js'
-
+/**
+ * Hot Module Replacement (HMR)
+ */
 if (module.hot) {
   module.hot.accept()
 }
-
+/**
+ * Init: Set handlers functions to views methods
+ */
 const init = () => {
   bookmarksView.addHandlerRender(controlBookmarks)
   recipeView.addHandlerRender(controlRecipes)
@@ -23,9 +27,13 @@ const init = () => {
   paginationView.addHandlerClick(controlPagination)
   addRecipeView.addHandlerUpload(controlAddRecipe)
 }
-
+/**
+ * Control function: pass id to model and data of recipe to update recipeView
+ * @param {string} id
+ */
 const controlRecipes = async () => {
-  const id = ID_HASH
+  const id = window.location.hash.slice(1)
+
   if (!id) return
 
   recipeView.renderSpinner()
@@ -41,7 +49,9 @@ const controlRecipes = async () => {
     console.error(`${error} 🤷‍♂️`)
   }
 }
-
+/**
+ * Control function: pass query to model and data of search results to render searchResultsView and paginationView
+ */
 const controlSearchResults = async () => {
   searchResultsView.renderSpinner()
 
@@ -56,17 +66,25 @@ const controlSearchResults = async () => {
     console.error(`${error} 🤷‍♂️`)
   }
 }
-
+/**
+ * Control function: pass page to model and data of pagination to render searchResultsView and paginationView
+ * @param {number} page
+ */
 const controlPagination = (page) => {
   searchResultsView.render(model.getSearchResultsPage(page))
   paginationView.render(model.state.search)
 }
-
+/**
+ * Control function: pass servings to model and data of recipe to update recipeView
+ * @param {number} servings
+ */
 const controlServings = (servings) => {
   model.updateServings(servings)
   recipeView.update(model.state.recipe)
 }
-
+/**
+ * Control function: pass data of recipe bookmarked to model, update bookmarksView and pass data of bookmarks to update bookmarksView
+ */
 const controlAddBookmark = () => {
   !model.state.recipe.bookmarked
     ? model.addBookmark(model.state.recipe)
@@ -76,11 +94,16 @@ const controlAddBookmark = () => {
 
   bookmarksView.render(model.state.bookmarks)
 }
-
+/**
+ * Control function: pass data of bookmarks to render bookmarksView
+ */
 const controlBookmarks = () => {
   bookmarksView.render(model.state.bookmarks)
 }
-
+/**
+ *  Control function: pass data of new recipe to model, recipeView and addRecipeView; set actions post upload
+ * @param {object} newRecipe
+ */
 const controlAddRecipe = async (newRecipe) => {
   try {
     addRecipeView.renderSpinner()
@@ -89,6 +112,7 @@ const controlAddRecipe = async (newRecipe) => {
     recipeView.render(model.state.recipe)
     addRecipeView.renderSuccess()
     bookmarksView.render(model.state.bookmarks)
+    // Change ID in URL
     window.history.pushState(null, '', `#${model.state.recipe.id}`)
 
     setTimeout(() => {
@@ -99,7 +123,9 @@ const controlAddRecipe = async (newRecipe) => {
     console.error(`${error} 🤷‍♂️`)
     addRecipeView
       .renderError(error.message)
-      .then(addRecipeView.render(model.state.recipe))
+    setTimeout(() => {
+      addRecipeView.render(model.state.recipe)
+    }, MODAL_CLOSE_SEC * 1000)
   }
 }
 
