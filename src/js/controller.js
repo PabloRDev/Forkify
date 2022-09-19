@@ -26,6 +26,9 @@ const init = () => {
   searchView.addHandlerSearch(controlSearchResults)
   paginationView.addHandlerClick(controlPagination)
   addRecipeView.addHandlerUpload(controlAddRecipe)
+
+  // TODO: add handler for shopping list
+  controlShoppingList()
 }
 /**
  * Control function: pass id to model and data of recipe to update recipeView
@@ -127,6 +130,10 @@ const controlAddRecipe = async (newRecipe) => {
       addRecipeView.render(model.state.recipe)
     }, MODAL_CLOSE_SEC * 1000)
   }
+}
+
+const controlShoppingList = () => {
+  model.addShoppingList(model.state.bookmarks)
 }
 
 init()

@@ -11,7 +11,8 @@ export const state = {
     resultsPerPage: RES_PER_PAGE,
     page: 1
   },
-  bookmarks: []
+  bookmarks: [],
+  shoppingList: []
 }
 /**
  * Init: Load bookmarks from local storage and set them to state.bookmarks
@@ -131,6 +132,15 @@ export const uploadRecipe = async (newRecipe) => {
     state.recipe = _formatRecipeObject(data)
     addBookmark(state.recipe)
   } catch (error) { throw error }
+}
+
+export const addShoppingList = (bookmarks) => {
+  const ingrArr = bookmarks.map(bookmark => bookmark.ingredients).flat().map(ing =>
+    ing.description
+  )
+  ingrArr.forEach(ing => {
+    !state.shoppingList.includes(ing) && state.shoppingList.push(ing)
+  })
 }
 // Helpers //
 /**
