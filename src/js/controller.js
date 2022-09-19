@@ -129,4 +129,15 @@ const controlAddRecipe = async (newRecipe) => {
   }
 }
 
+const controlNutrition = async () => {
+  try {
+    const ingredientId = await model.getIngredientId('egg')
+    await model.loadNutrition(ingredientId)
+  } catch (error) {
+    console.error(`${error} 🤷‍♂️`)
+  }
+}
+
+controlNutrition()
+
 init()

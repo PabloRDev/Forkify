@@ -1,10 +1,11 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-useless-catch */
-import { API_URL, RES_PER_PAGE, API_KEY } from './config'
+import { API_URL, NUTRI_URL, ING_SEARCH_URL, RES_PER_PAGE, API_KEY, NUTRI_API_KEY } from './config'
 import { AJAX } from './helpers'
 
 export const state = {
   recipe: {},
+  nutrition: {},
   search: {
     query: '',
     results: [],
@@ -132,6 +133,33 @@ export const uploadRecipe = async (newRecipe) => {
     addBookmark(state.recipe)
   } catch (error) { throw error }
 }
+
+export const loadNutrition = async (id) => {
+  try {
+    const data = await AJAX(`${NUTRI_URL}/${id}/information?apiKey=${NUTRI_API_KEY}&amount=100&unit=g`)
+
+    const calories = data.nutrition.nutrients.filter((nutrient) => {
+      return nutrient.name === 'Calories'
+    })
+    const start = Math.trunc(calories[0].amount * 0.8)
+    const end = Math.trunc(calories[0].amount * 1.2)
+    const caloriesRange = `${start} - ${end} calories per 100 grams / 3.5 ounces / 100 ml`
+    console.log(data)
+
+    console.log(caloriesRange)
+  } catch (error) { throw error }
+}
+
+export const getIngredientId = async (ingredient) => {
+  try {
+    const data = await AJAX(`${ING_SEARCH_URL}?query=${ingredient}&apiKey=${NUTRI_API_KEY}&sort=calories&sortDirection=desc`)
+
+    const midpointId = data.results[data.results.length / 2].id
+
+    return midpointId
+  } catch (error) { throw error }
+}
+
 // Helpers //
 /**
  * Format recipe object
