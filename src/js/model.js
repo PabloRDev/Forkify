@@ -158,6 +158,7 @@ const _formatRecipeObject = (data) => {
     servings: recipe.servings,
     cookingTime: recipe.cooking_time,
     ingredients: recipe.ingredients,
+    sourceUrl: recipe.source_url,
     ...(recipe.key && { key: recipe.key })
   }
 }
