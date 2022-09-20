@@ -9,6 +9,7 @@ import searchResultsView from './views/searchResultsView.js'
 import paginationView from './views/paginationView.js'
 import bookmarksView from './views/bookmarksView.js'
 import addRecipeView from './views/addRecipeView.js'
+import shoppingListView from './views/shoppingListView.js'
 /**
  * Hot Module Replacement (HMR)
  */
@@ -26,6 +27,7 @@ const init = () => {
   searchView.addHandlerSearch(controlSearchResults)
   paginationView.addHandlerClick(controlPagination)
   addRecipeView.addHandlerUpload(controlAddRecipe)
+  shoppingListView.addHandlerShoppingList(controlShoppingList)
 }
 /**
  * Control function: pass id to model and data of recipe to update recipeView
@@ -91,8 +93,8 @@ const controlAddBookmark = () => {
     : model.deleteBookmark(model.state.recipe.id)
 
   recipeView.update(model.state.recipe)
-
   bookmarksView.render(model.state.bookmarks)
+  model.addShoppingList(model.state.bookmarks)
 }
 /**
  * Control function: pass data of bookmarks to render bookmarksView
@@ -127,6 +129,12 @@ const controlAddRecipe = async (newRecipe) => {
       addRecipeView.render(model.state.recipe)
     }, MODAL_CLOSE_SEC * 1000)
   }
+}
+
+const controlShoppingList = () => {
+  const shoppingList = model.state.shoppingList
+  model.addShoppingList(model.state.bookmarks)
+  shoppingListView.render(shoppingList)
 }
 
 init()
