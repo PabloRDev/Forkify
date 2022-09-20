@@ -93,8 +93,8 @@ const controlAddBookmark = () => {
     : model.deleteBookmark(model.state.recipe.id)
 
   recipeView.update(model.state.recipe)
-
   bookmarksView.render(model.state.bookmarks)
+  model.addShoppingList(model.state.bookmarks)
 }
 /**
  * Control function: pass data of bookmarks to render bookmarksView
