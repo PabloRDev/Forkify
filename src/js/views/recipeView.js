@@ -138,6 +138,7 @@ this._data.publisher
             </svg>
           </a>
         </div>
+
     `
   }
 
