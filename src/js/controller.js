@@ -95,6 +95,7 @@ const controlAddBookmark = () => {
   recipeView.update(model.state.recipe)
   bookmarksView.render(model.state.bookmarks)
   model.addShoppingList(model.state.bookmarks)
+  shoppingListView.render(model.state.shoppingList)
 }
 /**
  * Control function: pass data of bookmarks to render bookmarksView
@@ -132,9 +133,8 @@ const controlAddRecipe = async (newRecipe) => {
 }
 
 const controlShoppingList = () => {
-  const shoppingList = model.state.shoppingList
   model.addShoppingList(model.state.bookmarks)
-  shoppingListView.render(shoppingList)
+  shoppingListView.render(model.state.shoppingList)
 }
 
 init()
